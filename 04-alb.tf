@@ -10,8 +10,8 @@ resource "aws_lb" "load-balacer-back" {
   subnets = [
     aws_subnet.back-private-subnet-1.id,
     aws_subnet.back-private-subnet-2.id,
-    aws_subnet.front-private-subnet-1.id,
-    aws_subnet.front-private-subnet-2.id
+    aws_subnet.front-public-subnet-1.id,
+    aws_subnet.front-public-subnet-2.id
   ]
 
   enable_deletion_protection = false

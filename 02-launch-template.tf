@@ -32,5 +32,9 @@ resource "aws_launch_template" "app_node" {
     }
   }
 
-  user_data = filebase64("files/user_data.sh")
+ user_data  = templatefile("files/backend-deploy-data.sh", {
+     msql_url      = "jdbc:mysql://${aws_db_instance.mysql.address}:${aws_db_instance.mysql.port}/${aws_db_instance.mysql.name}",
+     msql_username = aws_db_instance.mysql.username, msql_password = aws_db_instance.mysql.password
+   })
+   depends_on = [aws_db_instance.mysql]
 }
